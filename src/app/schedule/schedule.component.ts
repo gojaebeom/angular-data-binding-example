@@ -6,13 +6,13 @@ import { Schedule } from './schedule.type';
   template: `
   <h1>투두리스트</h1>
   <app-schedule-add 
-    (createdSchedule)="addedSchedule($event)"
+    (createdSchedule)="addSchedule($event)"
   ></app-schedule-add>
   <ul>
     <app-schedule-item 
       *ngFor="let schedule of schedules" 
       [schedule]="schedule"
-      (changedSchedule)="changedSchedule($event)"
+      (changedSchedule)="editSchedule($event)"
       (toBeDeletedScheduleId)="destorySchedule($event)"
     ></app-schedule-item>
   </ul>
@@ -21,12 +21,12 @@ import { Schedule } from './schedule.type';
 export class ScheduleComponent {
   schedules: Schedule[] = [];
 
-  addedSchedule(schedule: Schedule) {
+  addSchedule(schedule: Schedule) {
     console.log(schedule);
     this.schedules.push(schedule);
   }
 
-  changedSchedule(changedSchedule: Schedule) {
+  editSchedule(changedSchedule: Schedule) {
     console.log(changedSchedule);
     const changedSchedules = this.schedules.map((schedule) => {
       if (schedule.id === changedSchedule.id) {
